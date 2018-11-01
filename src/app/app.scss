@@ -14,3 +14,42 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.alert-title {
+    text-align: center;
+    color: Red;
+}
+.alert-sub-title {
+    text-align: center;
+}
+.alert-md .alert-button {
+    margin: auto;
+}
+.alert-md .alert-button-group {
+    padding: 8px;
+}
+.toolbar-background {
+    background: orangered;
+}
+.toolbar-title {
+    color: white;
+}
+.bar-button-menutoggle-md ion-icon {
+    color: white;
+}
+.bar-button-md[icon-only] ion-icon {
+    color: white;
+}
+.back-button-md {
+    color: white;
+}
+.item-inner {
+    border-bottom: 0!important;
+}
+.fixed-content {
+    background-image: url('../assets/imgs/background.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    //opacity: 0.5;
+}

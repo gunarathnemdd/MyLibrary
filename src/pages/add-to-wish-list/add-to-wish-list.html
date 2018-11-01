@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Add To Wish List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form class="form list" [formGroup]="form" (ngSubmit)="addBook()">
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-auto>
+            <ion-label class="input-label" fixed>Book Title :</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input type="text" formControlName="title" id="book_title" placeholder="කවිකඳුර"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-auto>
+            <ion-label class="input-label" fixed>Title (English) :</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input type="text" formControlName="title_english" id="book_title_engish" placeholder="Kavikandura"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-auto>
+            <ion-label class="input-label" fixed>Authour :</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input type="text" formControlName="authour" id="book_authour" placeholder="සුනේත්‍රා රාජකරුණානායක"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row style="text-align: center">
+          <ion-col col-4 push-4>
+            <button ion-button type="submit" class="btnSend" [disabled]="!form.valid">Add</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </form>
+
+</ion-content>

@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="!isSearchBarOpened">MyLibrary</ion-title>
+    <ion-title *ngIf="!isSearchBarOpened">Wish List</ion-title>
     <ion-searchbar *ngIf="isSearchBarOpened" [(ngModel)]="myInput" [showCancelButton]="true" (ionInput)="searchByName($event)"
       (ionCancel)="cancelSearchBar()">
     </ion-searchbar>
@@ -16,27 +16,15 @@
 </ion-header>
 
 <ion-content padding autohide>
-  <div class="item-divider" *ngIf="!isSearchBarOpened">
-    <ion-item style="background-color: whitesmoke">
-      <ion-label style="color: black">Category</ion-label>
-      <ion-select [(ngModel)]="category" (ionChange)="getBooksByCategory(true)" interface="popover">
-        <ion-option value="all">All</ion-option>
-        <ion-option value="නවකතා">නවකතා</ion-option>
-        <ion-option value="පරිවර්තන">පරිවර්තන</ion-option>
-        <ion-option value="කෙටිකතා">කෙටිකතා</ion-option>
-      </ion-select>
-    </ion-item>
-  </div>
   <ion-grid>
     <div *ngIf="books.length">
-      <ion-row *ngFor="let book of books; let i = index" [ngClass]="(i % 2 == 0) ? 'lightyellow' : 'beige'" (click)="showDetails(book)">
+      <ion-row *ngFor="let book of books; let i = index" [ngClass]="(i % 2 == 0) ? 'lightyellow' : 'beige'">
         <ion-col col-9>
           <p id="book-title">{{book.title}}</p>
           <p id="book-authour">{{book.authour}}</p>
         </ion-col>
         <ion-col col-3 text-right>
-          <ion-icon id="book-icon" name={{book.icon}}></ion-icon>
-          <p id="book-id">{{book.id}}</p>
+          <ion-icon id="book-icon" name="md-trash" (click)="deleteBook(book.row_id)"></ion-icon>
         </ion-col>
         <hr id="divider">
       </ion-row>

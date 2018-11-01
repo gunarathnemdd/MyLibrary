@@ -1,0 +1,57 @@
+page-book-details {
+    #book-icon {
+        color: blue;
+    }
+    .active {
+        border-bottom: 2px solid blue;
+        font-weight: bold;
+        color: blue;
+    }
+    .deactive {
+        border-bottom: none;
+        color: black;
+    }
+    #cancel-button {
+        margin-top: 5px;
+        margin-right: 5px;
+        color: white;
+    }
+    ion-textarea {
+        background-color: white;
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+    ion-input {
+        background-color: white;
+    }
+    ion-datetime {
+        background-color: white;
+    }
+    .is-read {
+        background-color: white;
+        padding-left: 10px;
+    }
+    .display {
+        display: block;
+    }
+    .display-none {
+        display: none;
+    }
+    .read-state {
+        margin: auto;
+        padding-right: 5px;
+    }
+    .is-booh-lend {
+        margin: auto;
+    }
+    .awardsDiv{
+        border: 1px solid blue;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    ion-label[fixed] {
+        width: 110px;
+        font-weight: bold;
+    }
+}

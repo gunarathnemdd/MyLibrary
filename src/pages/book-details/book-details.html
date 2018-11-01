@@ -1,0 +1,213 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{book.title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="!isEdit" (click)="isEdit=true">
+        <ion-icon name="md-create"></ion-icon>
+      </button>
+      <button ion-button icon-only id="cancel-button" *ngIf="isEdit" (click)="isEdit=false">Cancel
+      </button>
+      <button ion-button icon-only *ngIf="!isEdit" (click)="deleteBook()">
+        <ion-icon name="md-trash"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid style="background-color: whitesmoke; margin-bottom: 5px;">
+    <ion-row>
+      <ion-col col-6 text-center [ngClass]="information" (click)="setClass('information')">BOOK
+      </ion-col>
+      <ion-col col-6 text-center [ngClass]="notes" (click)="setClass('notes')">NOTES
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <form class="form list" [formGroup]="form" (ngSubmit)="editBook()">
+    <ion-list>
+      <ion-grid style="background-color: whitesmoke;">
+        <ion-row>
+          <ion-col col-6>
+            <img [src]="image" onError="this.src='assets/imgs/logo.png'" />
+          </ion-col>
+          <ion-col col-6>
+            <ion-row>
+              <ion-col>
+                {{book.title}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{book.authour}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{book.category}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                රු. {{book.price}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{book.pages}} pages
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <div *ngIf="tab == 'informations'">
+          <ion-row>
+            <ion-col>
+              <strong>First Published Date:</strong> {{book.fpublished_date}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <strong>Published Date:</strong> {{book.published_date}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <strong>Publisher:</strong> {{book.publisher}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <strong>ISBN:</strong> {{book.isbn}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <strong>Series:</strong> {{book.series}} (volume {{book.volume}})
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <strong>Book ID:</strong> {{book.id}}
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!isEdit">
+            <ion-col text-justify>
+              {{book.note}}
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="isEdit">
+            <ion-col col-auto>
+              <ion-label class="input-label" fixed>Description :</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-textarea type="text" formControlName="note" id="book_description" placeholder="ස්වර්ණ පුස්තක සම්මානය - 2011"></ion-textarea>
+            </ion-col>
+          </ion-row>
+          <div *ngIf="book.awards.length">
+            <ion-row *ngFor="let award of book.awards">
+              <ion-col col-auto>
+                <ion-icon id="book-icon" name="ios-ribbon"></ion-icon>&nbsp;{{award.title}} - {{award.year}}
+              </ion-col>
+              <ion-col *ngIf="award.status !== 'සම්මානය'" col-auto>
+                &nbsp;({{award.status}})
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+        <div *ngIf="tab == 'notes' && !isEdit">
+          <ion-row>
+            <ion-col *ngIf="book.is_read == 1">
+              Already read the book.&nbsp;&nbsp;<ion-icon id="book-icon" name={{book.icon}}></ion-icon>
+            </ion-col>
+            <ion-col *ngIf="book.is_read == 2">
+              Reading the book.&nbsp;&nbsp;<ion-icon id="book-icon" name={{book.icon}}></ion-icon>
+            </ion-col>
+            <ion-col *ngIf="book.is_read == 3">
+              Did not read the book.&nbsp;&nbsp;<ion-icon id="book-icon" name={{book.icon}}></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="book.lend_name != ''">
+            <ion-col>
+              {{book.lend_name}} lend the book on {{book.lend_date}}.
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="book.special_note != ''">
+            <ion-col>
+              {{book.special_note}}.
+            </ion-col>
+          </ion-row>
+        </div>
+        <div *ngIf="tab == 'notes' && isEdit">
+          <ion-row>
+            <ion-col>
+              <ion-label class="input-label" fixed>Book :</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row radio-group formControlName="is_read" class="is-read">
+            <ion-col col-4>
+              <ion-row>
+                <ion-radio class="read-state" value="1"></ion-radio>
+                <ion-label>Read</ion-label>
+              </ion-row>
+            </ion-col>
+            <ion-col col-4>
+              <ion-row>
+                <ion-radio class="read-state" value="2"></ion-radio>
+                <ion-label>Reading</ion-label>
+              </ion-row>
+            </ion-col>
+            <ion-col col-4>
+              <ion-row>
+                <ion-radio class="read-state" value="3"></ion-radio>
+                <ion-label>Not Read</ion-label>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-auto>
+              <ion-row>
+                <ion-label class="title-label">Book lend to</ion-label>
+                <ion-checkbox class="is-booh-lend" formControlName="isBookLend" (ionChange)="isBookLend()"></ion-checkbox>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <div formArrayName="lend" [ngClass]="lendByDivClass">
+            <section class="awardsDiv" [formGroupName]="i" *ngFor="let tech of form.controls.lend.controls; let i = index">
+              <ion-item-group>
+                <ion-row>
+                  <ion-col col-auto>
+                    <ion-label class="input-label" fixed>Name :</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input type="text" formControlName="lend_name" placeholder="Dhanuka"></ion-input>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-auto>
+                    <ion-label class="input-label" fixed>Date :</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-datetime type="text" displayFormat="YYYY-MM-DD" formControlName="lend_date" placeholder="2018-08-25"></ion-datetime>
+                  </ion-col>
+                </ion-row>
+              </ion-item-group>
+            </section>
+          </div>
+          <ion-row>
+            <ion-col col-auto>
+              <ion-label class="input-label" fixed>Special Note :</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-input type="text" formControlName="special_note" id="book_special_note" placeholder="Some pages are torn."
+                value={{book.special_note}}></ion-input>
+            </ion-col>
+          </ion-row>
+        </div>
+        <ion-row *ngIf="isEdit" style="text-align: center">
+          <ion-col col-4 push-4>
+            <button ion-button type="submit" class="btnSend" [disabled]="!form.valid">Update</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </form>
+</ion-content>
