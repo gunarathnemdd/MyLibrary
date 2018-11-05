@@ -17,8 +17,8 @@
 
 <ion-content padding autohide>
   <div class="item-divider" *ngIf="!isSearchBarOpened">
-    <ion-item style="background-color: whitesmoke">
-      <ion-label style="color: black">Category</ion-label>
+    <ion-item style="background-color: black; color: white; padding-bottom: 2px;">
+      <ion-label style="color: white">Category</ion-label>
       <ion-select [(ngModel)]="category" (ionChange)="getBooksByCategory(true)" interface="popover">
         <ion-option value="all">All</ion-option>
         <ion-option value="නවකතා">නවකතා</ion-option>
