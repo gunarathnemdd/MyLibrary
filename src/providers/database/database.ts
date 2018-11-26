@@ -51,9 +51,9 @@ export class DatabaseProvider {
       });
   }
  
-  addBook(book_id, title, title_english, authour, note, category, price, pages, first_published_date, published_date, publisher, isbn, series, volume, is_read, special_note, awardDetails, lend_name, lend_date, icon) {
-    let data = [book_id, title, title_english, authour, note, icon, category, first_published_date, published_date, publisher, series, volume, pages, isbn, price, awardDetails, is_read, lend_name, lend_date, special_note];
-    return this.database.executeSql("INSERT INTO books (book_id, title, title_english, authour, note, icon, category, fpublished_date, published_date, publisher, series, volume, pages, isbn, price, awards, is_read, lend_name, lend_date, special_note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data).then(data => {
+  addBook(book_id, title, title_english, authour, note, category, price, pages, first_published_date, published_date, publisher, isbn, volume, is_read, special_note, awardDetails, lend_name, lend_date, icon) {
+    let data = [book_id, title, title_english, authour, note, icon, category, first_published_date, published_date, publisher, volume, pages, isbn, price, awardDetails, is_read, lend_name, lend_date, special_note];
+    return this.database.executeSql("INSERT INTO books (book_id, title, title_english, authour, note, icon, category, fpublished_date, published_date, publisher, volume, pages, isbn, price, awards, is_read, lend_name, lend_date, special_note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data).then(data => {
       return 'book added';
     }, err => {
       console.log('Error: ', err);
@@ -98,7 +98,6 @@ export class DatabaseProvider {
             fpublished_date: data.rows.item(i).fpublished_date,
             published_date: data.rows.item(i).published_date,
             publisher: data.rows.item(i).publisher,
-            series: data.rows.item(i).series,
             volume: data.rows.item(i).volume,
             pages: data.rows.item(i).pages,
             isbn: data.rows.item(i).isbn,
@@ -136,7 +135,6 @@ export class DatabaseProvider {
             fpublished_date: data.rows.item(i).fpublished_date,
             published_date: data.rows.item(i).published_date,
             publisher: data.rows.item(i).publisher,
-            series: data.rows.item(i).series,
             volume: data.rows.item(i).volume,
             pages: data.rows.item(i).pages,
             isbn: data.rows.item(i).isbn,
@@ -174,7 +172,6 @@ export class DatabaseProvider {
             fpublished_date: data.rows.item(i).fpublished_date,
             published_date: data.rows.item(i).published_date,
             publisher: data.rows.item(i).publisher,
-            series: data.rows.item(i).series,
             volume: data.rows.item(i).volume,
             pages: data.rows.item(i).pages,
             isbn: data.rows.item(i).isbn,
@@ -212,7 +209,6 @@ export class DatabaseProvider {
             fpublished_date: data.rows.item(i).fpublished_date,
             published_date: data.rows.item(i).published_date,
             publisher: data.rows.item(i).publisher,
-            series: data.rows.item(i).series,
             volume: data.rows.item(i).volume,
             pages: data.rows.item(i).pages,
             isbn: data.rows.item(i).isbn,
@@ -250,7 +246,6 @@ export class DatabaseProvider {
             fpublished_date: data.rows.item(i).fpublished_date,
             published_date: data.rows.item(i).published_date,
             publisher: data.rows.item(i).publisher,
-            series: data.rows.item(i).series,
             volume: data.rows.item(i).volume,
             pages: data.rows.item(i).pages,
             isbn: data.rows.item(i).isbn,
@@ -277,26 +272,9 @@ export class DatabaseProvider {
         for (var i = 0; i < data.rows.length; i++) {
           books.push({ 
             row_id: data.rows.item(i).id,
-            id: data.rows.item(i).book_id, 
             title: data.rows.item(i).title, 
             title_english: data.rows.item(i).title_english, 
-            authour: data.rows.item(i).authour, 
-            note: data.rows.item(i).note, 
-            icon: data.rows.item(i).icon,
-            category: data.rows.item(i).category,
-            fpublished_date: data.rows.item(i).fpublished_date,
-            published_date: data.rows.item(i).published_date,
-            publisher: data.rows.item(i).publisher,
-            series: data.rows.item(i).series,
-            volume: data.rows.item(i).volume,
-            pages: data.rows.item(i).pages,
-            isbn: data.rows.item(i).isbn,
-            price: data.rows.item(i).price,
-            awards: data.rows.item(i).awards,
-            is_read: data.rows.item(i).is_read,
-            lend_name: data.rows.item(i).lend_name,
-            lend_date: data.rows.item(i).lend_date,
-            special_note: data.rows.item(i).special_note,
+            authour: data.rows.item(i).authour
           });
         }
       }
@@ -315,26 +293,9 @@ export class DatabaseProvider {
         for (var i = 0; i < data.rows.length; i++) {
           books.push({ 
             row_id: data.rows.item(i).id,
-            id: data.rows.item(i).book_id, 
             title: data.rows.item(i).title, 
             title_english: data.rows.item(i).title_english, 
-            authour: data.rows.item(i).authour, 
-            note: data.rows.item(i).note, 
-            icon: data.rows.item(i).icon,
-            category: data.rows.item(i).category,
-            fpublished_date: data.rows.item(i).fpublished_date,
-            published_date: data.rows.item(i).published_date,
-            publisher: data.rows.item(i).publisher,
-            series: data.rows.item(i).series,
-            volume: data.rows.item(i).volume,
-            pages: data.rows.item(i).pages,
-            isbn: data.rows.item(i).isbn,
-            price: data.rows.item(i).price,
-            awards: data.rows.item(i).awards,
-            is_read: data.rows.item(i).is_read,
-            lend_name: data.rows.item(i).lend_name,
-            lend_date: data.rows.item(i).lend_date,
-            special_note: data.rows.item(i).special_note,
+            authour: data.rows.item(i).authour
           });
         }
       }

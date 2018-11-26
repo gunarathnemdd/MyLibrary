@@ -45,7 +45,6 @@ export class ListPage {
       published_date: ['', Validators.required],
       publisher: ['', Validators.required],
       isbn: ['', Validators.required],
-      series: ['', Validators.required],
       volume: ['', Validators.required],
       is_read: ['', Validators.required],
       isBookLend: ['false'],
@@ -124,7 +123,6 @@ export class ListPage {
       let published_date = this.form.value['published_date'];
       let publisher = this.form.value['publisher'];
       let isbn = this.form.value['isbn'];
-      let series = this.form.value['series'];
       let volume = this.form.value['volume'];
       let is_read = this.form.value['is_read'];
       let special_note = this.form.value['special_note'];
@@ -149,7 +147,7 @@ export class ListPage {
       else if (is_read == 2) { icon = 'ios-bookmarks-outline' }
       else { icon = 'md-bookmarks' }
 
-      this.databaseProvider.addBook(book_id, title, title_english, authour, note, category, price, pages, first_published_date, published_date, publisher, isbn, series, volume, is_read, special_note, this.awardDetails, lend_name, lend_date, icon)
+      this.databaseProvider.addBook(book_id, title, title_english, authour, note, category, price, pages, first_published_date, published_date, publisher, isbn, volume, is_read, special_note, this.awardDetails, lend_name, lend_date, icon)
         .then(data => {
           console.log('book added');
           if (data == 'book added') {
